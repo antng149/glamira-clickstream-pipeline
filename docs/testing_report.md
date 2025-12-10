@@ -45,6 +45,7 @@ Kiểm tra File: **products.csv**
 ## 4. Final Conclusion
 
 Dữ liệu đã được:
+
 ✔ Nạp  
 ✔ Làm sạch  
 ✔ Xuất ra đúng chuẩn
