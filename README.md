@@ -37,10 +37,28 @@ Dự án xây dựng hệ thống xử lý dữ liệu lớn (**Big Data Pipelin
 | **Total Raw Records** | 41,432,473 | Số event được nạp vào `countly.summary` |
 | **Processed Unique IPs** | 3,239,628 | IP đã enrich vào `ip_locations` |
 | **Extracted Products** | 19,277 | Unique SKU từ URL & event |
-| **Processing Time** | ~10 mins | Xử lý 41M rows tối ưu Aggregation |
+
+## 📊 Key Data Insights (Phân tích dữ liệu chính)
+
+From 41M clickstream events enriched in Phase 1, the user behavior pattern shows:
+
+Dựa trên 41 triệu sự kiện hành vi đã xử lý ở Phase 1, hành vi người dùng thể hiện rõ:
+
+- Người dùng tương tác nhiều nhất tại trang chi tiết sản phẩm  
+  (19,417 lượt xem chi tiết sản phẩm)
+
+- Mức độ quan tâm cao đến tùy chọn sản phẩm (màu sắc, size…)  
+  (16,850 lượt chọn option + 8,731 lượt chọn chất lượng sản phẩm)
+
+- Tín hiệu chuyển đổi tốt qua hành động thêm vào giỏ hàng  
+  (11,311 hành động add-to-cart)
+
+- Hệ thống gợi ý sản phẩm hoạt động hiệu quả  
+  (16,944 lượt hiển thị gợi ý & 14,544 lượt người dùng chú ý đến gợi ý)
+  
+➡️ Kết quả cho thấy dữ liệu đạt chất lượng tốt và sẵn sàng cho các phân tích chuyên sâu ở giai đoạn tiếp theo.
 
 ---
-
 
 
 ---
