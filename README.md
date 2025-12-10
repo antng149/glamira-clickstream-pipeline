@@ -8,7 +8,8 @@ Dự án xây dựng hệ thống xử lý dữ liệu lớn (**Big Data Pipelin
 - Thực hiện quy trình **ETL (Extract – Transform – Load)**
 - Làm giàu thông tin địa lý và sản phẩm phục vụ Analytics
 
-**Mục tiêu dự án:** xây dựng hạ tầng trên Cloud, nạp hơn 41 triệu bản ghi dữ liệu thô và thực hiện quy trình ETL (Extract - Transform - Load) để làm sạch, trích xuất thông tin địa lý & danh mục sản phẩm phục vụ Analytics.
+**Mục tiêu dự án:** 
+- Xây dựng hạ tầng trên Cloud, nạp hơn 41 triệu bản ghi dữ liệu thô và thực hiện quy trình ETL (Extract - Transform - Load) để làm sạch, trích xuất thông tin địa lý & danh mục sản phẩm phục vụ Analytics.
 ---
 
 ## 2️⃣ Architecture & Tech Stack (Kiến trúc & Công nghệ)
