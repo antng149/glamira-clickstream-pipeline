@@ -106,7 +106,7 @@ Mục tiêu: Tạo danh sách sản phẩm chuẩn từ các URL sự kiện.
 
 Logic xử lý:
 
-Quét 7 loại sự kiện liên quan đến sản phẩm (view, add_to_cart, recommendation...).
+Quét 6 loại sự kiện liên quan đến sản phẩm (view, add_to_cart, recommendation...).
 
 Xử lý logic ưu tiên: Lấy product_id hoặc viewing_product_id.
 
@@ -149,14 +149,3 @@ python3 scripts/extract_products.py
 
 ls -lh *.csv
 
-
-7. Future Improvements (Cải tiến tương lai)
-
-[ ] Tự động hóa Pipeline bằng Apache Airflow.
-
-[ ] Đẩy dữ liệu đã làm sạch lên BigQuery để phân tích chuyên sâu.
-
-[ ] Xây dựng Dashboard báo cáo bằng Looker Studio.
-
-Author: [Tên của bạn]
-Course: K20 Data Engineering
