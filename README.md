@@ -1,151 +1,112 @@
-🚀 Glamira Clickstream Data Engineering Pipeline
+## 1️⃣ Project Overview (Tổng quan dự án)
 
-1. Project Overview (Tổng quan dự án)
+Dự án xây dựng hệ thống xử lý dữ liệu lớn (**Big Data Pipeline**) cho dữ liệu hành vi người dùng (Clickstream) của trang thương mại điện tử **Glamira**.
 
-Dự án xây dựng hệ thống xử lý dữ liệu lớn (Big Data Pipeline) cho dữ liệu hành vi người dùng (Clickstream) của trang thương mại điện tử Glamira.
+**Mục tiêu:**
+- Xây dựng hạ tầng trên Cloud
+- Nạp hơn **41 triệu bản ghi** dữ liệu thô
+- Thực hiện quy trình **ETL (Extract – Transform – Load)**
+- Làm giàu thông tin địa lý và sản phẩm phục vụ Analytics
 
-Mục tiêu là xây dựng hạ tầng trên Cloud, nạp hơn 41 triệu bản ghi dữ liệu thô, và thực hiện các quy trình ETL (Extract - Transform - Load) để làm sạch, trích xuất thông tin địa lý và danh mục sản phẩm phục vụ cho Analytics.
+=> Mục tiêu là xây dựng hạ tầng trên Cloud, nạp hơn 41 triệu bản ghi dữ liệu thô, và thực hiện các quy trình ETL (Extract - Transform - Load) để làm sạch, trích xuất thông tin địa lý và danh mục sản phẩm phục vụ cho Analytics.
+---
 
-Role: Data Engineer
+## 2️⃣ Architecture & Tech Stack (Kiến trúc & Công nghệ)
 
-Platform: Google Cloud Platform (GCP)
+### 🛠 Tech Stack
 
-Dataset Volume: ~41,432,473 records
+#### Cloud Infrastructure
+- **Google Cloud Storage (GCS):** lưu trữ Raw Data (`.tar.gz`, `.bin`)
+- **Google Compute Engine (GCE):** Ubuntu 22.04 LTS VM (e2-medium, 50GB SSD)
 
-Status: Phase 1 Completed
+#### Database
+- **MongoDB Community 7.0** — Lưu trữ dữ liệu bán cấu trúc (JSON/BSON)
 
-2. Architecture & Tech Stack (Kiến trúc & Công nghệ)
+#### Programming & Tools
+- **Python 3**
+- Libraries: `pymongo`, `IP2Location`, `csv`, `re`
+- Tools: `gcloud CLI`, `mongosh`, `mongoexport`
 
-🛠 Tech Stack
+---
 
-Cloud Infrastructure:
+## 3️⃣ Key Achievements (Kết quả đạt được)
 
-Google Cloud Storage (GCS): Lưu trữ Raw Data (.tar.gz, .bin).
+| Metric | Value | Description |
+|-------|------:|-------------|
+| **Total Raw Records** | 41,432,473 | Số event được nạp vào `countly.summary` |
+| **Processed Unique IPs** | 3,239,628 | IP đã enrich vào `ip_locations` |
+| **Extracted Products** | 19,277 | Unique SKU từ URL & event |
+| **Processing Time** | ~10 mins | Xử lý 41M rows tối ưu Aggregation |
 
-Google Compute Engine (GCE): Máy ảo Ubuntu 22.04 LTS (e2-medium, 50GB SSD) để xử lý dữ liệu.
+---
 
-Database:
 
-MongoDB Community 7.0: NoSQL Database để lưu trữ dữ liệu bán cấu trúc (JSON/BSON).
 
-Programming & Tools:
+---
 
-Python 3: Ngôn ngữ xử lý chính (ETL).
+## 4️⃣ Pipeline Steps (Quy trình xử lý)
 
-Libraries: pymongo, IP2Location, csv, re.
+### ✔ Step 1: Infrastructure Setup
+- Tạo GCS Bucket: `raw-project5-k20`
+- Tạo VM Instance + Firewall + API permissions
+- Cài đặt MongoDB Server & Python Environment
 
-Tools: gcloud CLI, mongosh, mongoexport.
+### ✔ Step 2: Data Ingestion (Nạp liệu)
+- Tải dữ liệu từ GCS → VM
+- Giải nén **5.5GB → ~30GB**
+- `mongorestore` nạp vào database
 
-3. Key Achievements (Kết quả đạt được)
+### ✔ Step 3: IP Location Enrichment
+- Dữ liệu quá lớn → **không lookup từng record**
+- Giải pháp: **Unique IP Strategy**
+- MongoDB Aggregation → danh sách IP unique
+- Lookup địa lý bằng `IP2Location .BIN`
+- Tạo collection: `ip_locations`
 
-Dự án đã xử lý thành công khối lượng dữ liệu lớn với các chỉ số cụ thể:
+### ✔ Step 4: Product Master Extraction
+- Quét event liên quan đến sản phẩm
+- Ưu tiên: `product_id` → `viewing_product_id`
+- Regex xử lý slug → Tạo Product Master
+- Remove duplicate → **Unique Product List**
 
-Metric
+---
 
-Value
-
-Description
-
-Total Raw Records
-
-41,432,473
-
-Tổng số sự kiện (events) được nạp vào MongoDB (countly.summary).
-
-Processed Unique IPs
-
-3,239,628
-
-Số lượng IP duy nhất được xử lý và định vị địa lý.
-
-Extracted Products
-
-19,277
-
-Danh sách sản phẩm duy nhất (Unique SKUs) được trích xuất và làm sạch từ URL.
-
-Processing Time
-
-~10 mins
-
-Thời gian xử lý 41 triệu dòng nhờ tối ưu thuật toán Aggregation.
-
-4. Pipeline Steps (Quy trình xử lý)
-
-Step 1: Infrastructure Setup (Hạ tầng)
-
-Thiết lập GCS Bucket (raw-project5-k20) để chứa dữ liệu thô.
-
-Khởi tạo VM Instance trên GCP, cấu hình Firewall và quyền truy cập API.
-
-Cài đặt môi trường: MongoDB Server, Python environment.
-
-Step 2: Data Ingestion (Nạp liệu)
-
-Tải dữ liệu từ GCS về VM.
-
-Giải nén file .tar.gz (5.5GB nén -> ~30GB giải nén).
-
-Sử dụng mongorestore để nạp dữ liệu BSON vào Database.
-
-Step 3: IP Location Enrichment (Làm giàu dữ liệu địa lý)
-
-Thách thức: Dữ liệu quá lớn (41 triệu dòng), không thể tra cứu từng dòng.
-
-Giải pháp: Sử dụng chiến thuật "Unique IP Strategy".
-
-Dùng MongoDB Aggregation để lọc ra danh sách IP duy nhất.
-
-Sử dụng thư viện IP2Location và database .BIN để tra cứu thông tin (Country, City, Region).
-
-Lưu kết quả vào collection riêng ip_locations.
-
-Step 4: Product Master Data Extraction (Trích xuất danh mục)
-
-Mục tiêu: Tạo danh sách sản phẩm chuẩn từ các URL sự kiện.
-
-Logic xử lý:
-
-Quét 6 loại sự kiện liên quan đến sản phẩm (view, add_to_cart, recommendation...).
-
-Xử lý logic ưu tiên: Lấy product_id hoặc viewing_product_id.
-
-URL Parsing: Sử dụng Regex để cắt chuỗi URL, trích xuất tên sản phẩm (Slug) và làm sạch (Capitalize, remove dashes).
-
-Deduplication: Loại bỏ trùng lặp để có danh sách Unique Product.
-
-5. Repository Structure (Cấu trúc thư mục)
+## 5️⃣ Repository Structure (Cấu trúc thư mục)
 
 ```
 ├── docs/
-│   ├── DATA_DICTIONARY.md      # Tài liệu mô tả cấu trúc dữ liệu chi tiết
-│   └── TESTING_REPORT.md       # Báo cáo kiểm thử chất lượng dữ liệu
+│   ├── DATA_DICTIONARY.md      # Tài liệu mô tả cấu trúc dữ liệu
+│   └── TESTING_REPORT.md       # Data Quality Verification Report
 ├── scripts/
-│   ├── process_ips.py          # Script xử lý IP Location
-│   └── extract_products.py     # Script trích xuất thông tin sản phẩm
+│   ├── process_ips.py          # Enrich IP Location
+│   └── extract_products.py     # Trích xuất Product Master
 ├── data_sample/
-│   └── products.csv            # File kết quả mẫu (Danh sách sản phẩm)
+│   └── products.csv            # File kết quả mẫu
 └── README.md                   # Tài liệu tổng quan dự án
 ```
 
-6. How to Run (Hướng dẫn chạy)
+---
 
-1. SSH vào máy ảo GCP:
+## 6️⃣ How to Run (Hướng dẫn chạy)
 
+### SSH vào VM
+```bash
 gcloud compute ssh mongodb-server-project5
+```
 
-
-2. Chạy script xử lý IP:
-
+### Chạy script xử lý IP
+```bash
 python3 scripts/process_ips.py
+```
 
-
-3. Chạy script trích xuất sản phẩm:
-
+### Chạy script trích xuất sản phẩm
+```bash
 python3 scripts/extract_products.py
+```
 
-
-4. Kiểm tra kết quả:
-
+### Kiểm tra file đầu ra
+```bash
 ls -lh *.csv
+```
+
 
