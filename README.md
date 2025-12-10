@@ -116,6 +116,7 @@ Deduplication: Loại bỏ trùng lặp để có danh sách Unique Product.
 
 5. Repository Structure (Cấu trúc thư mục)
 
+```
 ├── docs/
 │   ├── DATA_DICTIONARY.md      # Tài liệu mô tả cấu trúc dữ liệu chi tiết
 │   └── TESTING_REPORT.md       # Báo cáo kiểm thử chất lượng dữ liệu
@@ -125,7 +126,7 @@ Deduplication: Loại bỏ trùng lặp để có danh sách Unique Product.
 ├── data_sample/
 │   └── products.csv            # File kết quả mẫu (Danh sách sản phẩm)
 └── README.md                   # Tài liệu tổng quan dự án
-
+```
 
 6. How to Run (Hướng dẫn chạy)
 
