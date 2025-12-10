@@ -116,8 +116,6 @@ Deduplication: Loại bỏ trùng lặp để có danh sách Unique Product.
 
 5. Repository Structure (Cấu trúc thư mục)
 
-
-```
 ├── docs/
 │   ├── DATA_DICTIONARY.md      # Tài liệu mô tả cấu trúc dữ liệu chi tiết
 │   └── TESTING_REPORT.md       # Báo cáo kiểm thử chất lượng dữ liệu
@@ -127,37 +125,37 @@ Deduplication: Loại bỏ trùng lặp để có danh sách Unique Product.
 ├── data_sample/
 │   └── products.csv            # File kết quả mẫu (Danh sách sản phẩm)
 └── README.md                   # Tài liệu tổng quan dự án
-```
+
 
 6. How to Run (Hướng dẫn chạy)
 
-SSH vào máy ảo GCP:
+1. SSH vào máy ảo GCP:
 
 gcloud compute ssh mongodb-server-project5
 
 
-Chạy script xử lý IP:
+2. Chạy script xử lý IP:
 
 python3 scripts/process_ips.py
 
 
-Chạy script trích xuất sản phẩm:
+3. Chạy script trích xuất sản phẩm:
 
 python3 scripts/extract_products.py
 
 
-Kiểm tra kết quả:
+4. Kiểm tra kết quả:
 
 ls -lh *.csv
 
 
 7. Future Improvements (Cải tiến tương lai)
 
-Tự động hóa Pipeline bằng Airflow.
+[ ] Tự động hóa Pipeline bằng Apache Airflow.
 
-Đẩy dữ liệu đã làm sạch lên BigQuery để phân tích chuyên sâu.
+[ ] Đẩy dữ liệu đã làm sạch lên BigQuery để phân tích chuyên sâu.
 
-Xây dựng Dashboard báo cáo bằng Looker Studio.
+[ ] Xây dựng Dashboard báo cáo bằng Looker Studio.
 
-Author: Nguyễn Hữu Huy Anh
-Course: K20 Data Engineering               
+Author: [Tên của bạn]
+Course: K20 Data Engineering
